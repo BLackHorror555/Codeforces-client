@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.local;
+package com.example.codeforcesclient.data.local.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -24,19 +24,19 @@ public final class User {
     private String mEmail;
 
     @Nullable
-    @ColumnInfo(name = "vkId")
+    @ColumnInfo(name = "vk_id")
     private String mVkId;
 
     @Nullable
-    @ColumnInfo(name = "openId")
+    @ColumnInfo(name = "open_id")
     private String openId;
 
     @Nullable
-    @ColumnInfo(name = "firstName")
+    @ColumnInfo(name = "first_name")
     private String firstName;
 
     @Nullable
-    @ColumnInfo(name = "lastName")
+    @ColumnInfo(name = "last_name")
     private String lastName;
 
     @Nullable
@@ -56,34 +56,40 @@ public final class User {
     private String rank;
 
     @Nullable
-    @ColumnInfo(name = "maxRank")
+    @ColumnInfo(name = "max_rank")
     private String maxRank;
 
+    @NonNull
     @ColumnInfo(name = "contribution")
     private int contribution;
 
+    @NonNull
     @ColumnInfo(name = "rating")
     private int rating;
 
-    @ColumnInfo(name = "maxRating")
+    @NonNull
+    @ColumnInfo(name = "max_rating")
     private int maxRating;
 
-    @ColumnInfo(name = "lastOnlineTime")
+    @NonNull
+    @ColumnInfo(name = "last_online_time")
     private long lastOnlineTimeSeconds;
 
-    @ColumnInfo(name = "lastRegistrationTime")
+    @NonNull
+    @ColumnInfo(name = "last_registration_time")
     private long lastRegistrationTimeSeconds;
 
-    @ColumnInfo(name = "friendCount")
+    @NonNull
+    @ColumnInfo(name = "friend_count")
     private int friendCount;
 
+    @NonNull
     @ColumnInfo(name = "avatar")
     private URL avatar;
 
-    @ColumnInfo(name = "titlePhoto")
+    @NonNull
+    @ColumnInfo(name = "title_photo")
     private URL titlePhoto;
 
 
-    public User() {
-    }
 }

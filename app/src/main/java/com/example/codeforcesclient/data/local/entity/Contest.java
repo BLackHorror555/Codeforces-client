@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.local;
+package com.example.codeforcesclient.data.local.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -43,7 +43,7 @@ public class Contest {
     }
 
     @PrimaryKey
-    @ColumnInfo(name = "contest")
+    @ColumnInfo(name = "id")
     private int mId;
 
     @NonNull
@@ -64,6 +64,30 @@ public class Contest {
     @ColumnInfo(name = "duration")
     private int durationSeconds;
 
+    public int getId() {
+        return mId;
+    }
 
+    @NonNull
+    public String getName() {
+        return name;
+    }
 
+    @NonNull
+    public ContestType getType() {
+        return mType;
+    }
+
+    @NonNull
+    public ContestPhase getPhase() {
+        return mPhase;
+    }
+
+    public boolean isFrosen() {
+        return frosen;
+    }
+
+    public int getDurationSeconds() {
+        return durationSeconds;
+    }
 }
