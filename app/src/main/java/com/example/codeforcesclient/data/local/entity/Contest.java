@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.model;
+package com.example.codeforcesclient.data.local.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.dao;
+package com.example.codeforcesclient.data.local;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -7,8 +7,8 @@ import android.content.Context;
 
 import com.example.codeforcesclient.data.local.dao.ContestDao;
 import com.example.codeforcesclient.data.local.dao.UserDao;
-import com.example.codeforcesclient.data.model.Contest;
-import com.example.codeforcesclient.data.model.User;
+import com.example.codeforcesclient.data.local.entity.Contest;
+import com.example.codeforcesclient.data.local.entity.User;
 
 @Database(entities = {User.class, Contest.class}, version = 1)
 public abstract class CodeForcesDatabase extends RoomDatabase {

@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.codeforcesclient.data.model.Contest;
+import com.example.codeforcesclient.data.local.entity.Contest;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public interface ContestDao {
     void deleteById(int id);
 
     @Query("SELECT * FROM contests")
-    List<Contest> loadALl();
+    List<Contest> loadAll();
 
     @Query("SELECT * FROM contests WHERE name LIKE :contestName LIMIT 1")
     Contest findByName(String contestName);
