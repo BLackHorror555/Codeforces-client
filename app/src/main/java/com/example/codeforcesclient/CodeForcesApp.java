@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.example.codeforcesclient.di.components.AppComponent;
 import com.example.codeforcesclient.di.components.DaggerAppComponent;
-import com.example.codeforcesclient.di.modules.AppModule;
-import com.example.codeforcesclient.di.modules.NetModule;
 
 public class CodeForcesApp extends Application {
 
