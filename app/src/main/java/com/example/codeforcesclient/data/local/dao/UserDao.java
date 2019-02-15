@@ -1,6 +1,6 @@
 package com.example.codeforcesclient.data.local.dao;
 
-import android.arch.persistence.room.Dao;
+import androidx.room.Dao;
 
 @Dao
 public interface UserDao {

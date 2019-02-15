@@ -1,6 +1,6 @@
 package com.example.codeforcesclient.data.repository;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import com.example.codeforcesclient.data.local.dao.UserDao;
 import com.example.codeforcesclient.data.local.entity.User;
