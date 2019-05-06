@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Immutable model class for Contest.
  */
-@Entity(tableName = "contests")
+@Entity(tableName = "contest")
 public class Contest {
     /**
      * Type of contest.

@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  * Immutable model class for a User.
  */
-@Entity(tableName = "users")
+@Entity(tableName = "user")
 public final class User {
 
     @PrimaryKey

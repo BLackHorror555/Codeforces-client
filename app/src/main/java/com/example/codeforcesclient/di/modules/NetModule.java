@@ -1,6 +1,5 @@
 package com.example.codeforcesclient.di.modules;
 
-import com.example.codeforcesclient.data.remote.ContestService;
 import com.example.codeforcesclient.di.components.ViewModelSubComponent;
 import com.example.codeforcesclient.viewmodel.ViewModelFactory;
 import com.google.gson.FieldNamingPolicy;
