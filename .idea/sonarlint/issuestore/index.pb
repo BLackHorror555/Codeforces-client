@@ -31,3 +31,13 @@ Uapp/src/main/java/com/example/codeforcesclient/data/repository/ContestRepositor
 Rapp/src/main/java/com/example/codeforcesclient/data/repository/UserRepository.java,a/9/a9183011e6111cf5d0181d6a6b21e4f77103647c
 {
 Kapp/src/main/java/com/example/codeforcesclient/data/remote/UserService.java,9/b/9bc3aeef517259cf1e820902c7df9d71b8f08f56
+~
+Napp/src/main/java/com/example/codeforcesclient/di/components/AppComponent.java,5/4/5465dd11452910045ef3ace60b1e3e677920f5c7
+x
+Happ/src/main/java/com/example/codeforcesclient/di/modules/AppModule.java,3/1/3148de9a40519b7d13a6e631853d59d0081e0310
+q
+Aapp/src/main/java/com/example/codeforcesclient/CodeForcesApp.java,9/e/9eb99e9e60c7ec776d492f8a52072a9709005455
+x
+Happ/src/main/java/com/example/codeforcesclient/di/modules/NetModule.java,d/3/d3dd4fbc41f77ec4defc75cb91963367d0b033fa
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
