@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_problemset"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_problemset"
+        android:title="@string/nav_menu_problemset"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_contest"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_contests"
+        android:title="@string/nav_menu_contests"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_rating"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_rating"
+        android:title="@string/nav_menu_rating"
+        app:showAsAction="ifRoom" />
+</menu>

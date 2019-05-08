@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CodeforcesClient</string>
+    <string name="nav_menu_problemset">Recents</string>
+    <string name="nav_menu_contests">Favorites</string>
+    <string name="nav_menu_rating">Nearby</string>
 </resources>
