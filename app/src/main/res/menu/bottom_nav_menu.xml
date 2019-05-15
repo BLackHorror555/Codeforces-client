@@ -19,4 +19,17 @@
         android:icon="@drawable/ic_action_rating"
         android:title="@string/nav_menu_rating"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_gym"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_gym"
+        android:title="@string/nav_menu_gym"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_menu"
+        android:title="@string/nav_menu_menu"
+        app:showAsAction="ifRoom" />
 </menu>

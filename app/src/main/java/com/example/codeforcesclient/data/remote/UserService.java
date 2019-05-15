@@ -1,6 +1,6 @@
 package com.example.codeforcesclient.data.remote;
 
-import com.example.codeforcesclient.data.local.entity.User;
+import com.example.codeforcesclient.data.local.model.User;
 
 import java.util.List;
 

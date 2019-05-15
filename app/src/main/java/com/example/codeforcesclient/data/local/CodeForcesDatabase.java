@@ -7,8 +7,8 @@ import android.content.Context;
 
 import com.example.codeforcesclient.data.local.dao.ContestDao;
 import com.example.codeforcesclient.data.local.dao.UserDao;
-import com.example.codeforcesclient.data.local.entity.Contest;
-import com.example.codeforcesclient.data.local.entity.User;
+import com.example.codeforcesclient.data.local.model.Contest;
+import com.example.codeforcesclient.data.local.model.User;
 
 @Database(entities = {User.class, Contest.class}, version = 1)
 public abstract class CodeForcesDatabase extends RoomDatabase {

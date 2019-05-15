@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.local.entity;
+package com.example.codeforcesclient.data.local.model;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

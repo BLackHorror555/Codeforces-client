@@ -1,4 +1,4 @@
-package com.example.codeforcesclient.data.local.entity;
+package com.example.codeforcesclient.data.local.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -1,6 +1,6 @@
 package com.example.codeforcesclient.viewmodel;
 
-import com.example.codeforcesclient.data.local.entity.Problem;
+import com.example.codeforcesclient.data.local.model.Problem;
 
 import java.util.List;
 

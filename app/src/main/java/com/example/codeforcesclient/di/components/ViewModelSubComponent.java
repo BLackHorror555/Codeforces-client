@@ -1,11 +1,18 @@
 package com.example.codeforcesclient.di.components;
 
 import com.example.codeforcesclient.viewmodel.ContestViewModel;
+import com.example.codeforcesclient.viewmodel.ProblemViewModel;
+import com.example.codeforcesclient.viewmodel.UserViewModel;
+import com.example.codeforcesclient.viewmodel.ViewModelFactory;
 
 import dagger.Subcomponent;
 
 /**
  * Component responsible for creating of ViewModels.
+ *
+ * <p>
+ *     Used by {@link ViewModelFactory} for getting ViewModel instances.
+ * </p>
  */
 @Subcomponent
 public interface ViewModelSubComponent {
@@ -15,4 +22,6 @@ public interface ViewModelSubComponent {
     }
 
     ContestViewModel contestViewModel();
+//    ProblemViewModel problemViewModel();
+//    UserViewModel userViewModel();
 }

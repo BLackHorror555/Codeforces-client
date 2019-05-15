@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.codeforcesclient.data.local.entity.Contest;
+import com.example.codeforcesclient.data.local.model.Contest;
 
 import java.util.List;
 
@@ -22,18 +22,18 @@ public interface ContestDao {
     @Delete
     void delete(Contest aContest);
 
-    @Query("DELETE FROM contests")
+    @Query("DELETE FROM contest")
     void deleteAll();
 
-    @Query("DELETE FROM contests WHERE id = :id")
+    @Query("DELETE FROM contest WHERE id = :id")
     void deleteById(int id);
 
-    @Query("SELECT * FROM contests")
+    @Query("SELECT * FROM contest")
     List<Contest> loadAll();
 
-    @Query("SELECT * FROM contests WHERE name LIKE :contestName LIMIT 1")
+    @Query("SELECT * FROM contest WHERE name LIKE :contestName LIMIT 1")
     Contest findByName(String contestName);
 
-    @Query("SELECT * FROM contests WHERE id = :aId")
+    @Query("SELECT * FROM contest WHERE id = :aId")
     Contest findById(int aId);
 }

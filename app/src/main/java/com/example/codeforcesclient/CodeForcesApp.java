@@ -1,25 +1,32 @@
 package com.example.codeforcesclient;
 
+import android.app.Activity;
 import android.app.Application;
 
-import com.example.codeforcesclient.di.components.AppComponent;
+import com.example.codeforcesclient.di.AppInjector;
 import com.example.codeforcesclient.di.components.DaggerAppComponent;
 
-public class CodeForcesApp extends Application {
+import javax.inject.Inject;
 
-    private AppComponent mAppComponent;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class CodeForcesApp extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> mDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mAppComponent = DaggerAppComponent.builder()
-//                .appModule(new AppModule(this))
-//                .netModule(new NetModule("http://codeforces.com/api/"))
-                .build();
+        AppInjector.init(this);
     }
 
-    public AppComponent getAppComponent() {
-        return mAppComponent;
+
+
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return mDispatchingAndroidInjector;
     }
 }

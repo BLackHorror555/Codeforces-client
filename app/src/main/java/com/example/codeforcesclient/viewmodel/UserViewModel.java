@@ -1,4 +1,6 @@
 package com.example.codeforcesclient.viewmodel;
 
-public class UserViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class UserViewModel extends ViewModel {
 }

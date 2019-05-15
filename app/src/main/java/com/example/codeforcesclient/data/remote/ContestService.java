@@ -1,6 +1,6 @@
 package com.example.codeforcesclient.data.remote;
 
-import com.example.codeforcesclient.data.local.entity.Contest;
+import com.example.codeforcesclient.data.local.model.Contest;
 
 import java.util.List;
 
@@ -11,6 +11,5 @@ import retrofit2.http.Query;
 public interface ContestService {
 
     @GET("contest.list")
-    Call<List<Contest>> getContests(@Query("gym") Boolean gym);
-
+    Call<CodeForcesResponse<List<Contest>>> getContests(@Query("gym") Boolean gym);
 }
