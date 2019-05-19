@@ -1,5 +1,6 @@
 package com.example.codeforcesclient.data.local.model;
 
+import androidx.annotation.StringDef;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -17,38 +18,38 @@ public class Contest {
     /**
      * Type of contest.
      */
-    @IntDef({ContestType.CF, ContestType.IOI, ContestType.ICPC})
+    @StringDef({ContestType.CF, ContestType.IOI, ContestType.ICPC})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ContestType {
-        int CF = 0;
-        int IOI = 1;
-        int ICPC = 2;
+        String CF = "CF";
+        String IOI = "IOI";
+        String ICPC = "ICPC";
     }
 
     /*]
      * Phase of contest.
      */
-    @IntDef({ContestPhase.BEFORE,
+    @StringDef({ContestPhase.BEFORE,
             ContestPhase.CODING,
             ContestPhase.PENDING_SYSTEM_TEST,
             ContestPhase.SYSTEM_TEST,
             ContestPhase.FINISHED})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ContestPhase {
-        int BEFORE = 0;
-        int CODING = 1;
-        int PENDING_SYSTEM_TEST = 2;
-        int SYSTEM_TEST = 3;
-        int FINISHED = 4;
+        String BEFORE = "BEFORE";
+        String CODING = "CODING";
+        String PENDING_SYSTEM_TEST = "PENDING_SYSTEM_TEST";
+        String SYSTEM_TEST = "SYSTEM_TEST";
+        String FINISHED = "FINISHED";
     }
 
     @PrimaryKey
     private int id;
     private String name;
-//    @ContestType
-    private int type;
-//    @ContestPhase
-    private int phase;
+    @ContestType
+    private String type;
+    @ContestPhase
+    private String phase;
     private boolean frosen;
     private int durationSeconds;
     private int startTimeSeconds;
@@ -62,27 +63,6 @@ public class Contest {
     private String country;
     private String season;
 
-//    public Contest(int aId, @NonNull String aName, @ContestType int aType, @ContestPhase int aPhase,
-//                   boolean aFrosen, int aDurationSeconds, int aStartTimeSeconds, int aRelativeTimeSeconds,
-//                   String aPreparedBy, String aWebsiteUrl, String aDescription, int aDifficulty, String aKind,
-//                   String aIcpcRegion, String aCountry, String aSeason) {
-//        id = aId;
-//        name = aName;
-//        type = aType;
-//        phase = aPhase;
-//        frosen = aFrosen;
-//        durationSeconds = aDurationSeconds;
-//        startTimeSeconds = aStartTimeSeconds;
-//        relativeTimeSeconds = aRelativeTimeSeconds;
-//        preparedBy = aPreparedBy;
-//        websiteUrl = aWebsiteUrl;
-//        description = aDescription;
-//        difficulty = aDifficulty;
-//        kind = aKind;
-//        icpcRegion = aIcpcRegion;
-//        country = aCountry;
-//        season = aSeason;
-//    }
 
     public int getId() {
         return id;
@@ -101,19 +81,19 @@ public class Contest {
         name = aName;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(@NonNull int aType) {
+    public void setType(@NonNull String aType) {
         type = aType;
     }
 
-    public int getPhase() {
+    public String getPhase() {
         return phase;
     }
 
-    public void setPhase(@NonNull int aPhase) {
+    public void setPhase(@NonNull String aPhase) {
         phase = aPhase;
     }
 

@@ -25,9 +25,7 @@ public class ContestRepository {
 
     private static final String TAG = "ContestRepository";
     private ContestService mContestService;
-
     private static final int FRESH_TIMOUT_IN_S = 2 * 60;
-
     private ContestDao mContestDao;
 
 //    @Inject
@@ -42,32 +40,25 @@ public class ContestRepository {
 
     public LiveData<List<Contest>> getContests() {
         final MutableLiveData<List<Contest>> contests = new MutableLiveData<>();
-//        CodeForcesResponse<List<Contest>> contests;
 
         Call<CodeForcesResponse<List<Contest>>> contestsCall = mContestService.getContests(false);
 
         contestsCall.enqueue(new Callback<CodeForcesResponse<List<Contest>>>() {
             @Override
             public void onResponse(@NonNull Call<CodeForcesResponse<List<Contest>>> call, @NonNull Response<CodeForcesResponse<List<Contest>>> response) {
-                Log.w(TAG, response.toString());
-                contests.setValue(response.body().getResult());
+                if (response.body() != null) {
+                    contests.setValue(response.body().getResult());
+                } else {
+                    contests.setValue(Collections.emptyList());
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<CodeForcesResponse<List<Contest>>> call, @NonNull Throwable t) {
                 contests.setValue(Collections.emptyList());
-                Log.w(TAG, "Failed to load contests from server");
+                Log.w(TAG, "Failed to load contests from server. " + t);
             }
         });
         return contests;
-//        try {
-//            contests.postValue(contestsCall.execute().body());
-//        } catch (IOException aE) {
-//            aE.printStackTrace();
-//        }
-//
-//        return null;
     }
-
-
 }

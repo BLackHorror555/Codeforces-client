@@ -34,4 +34,13 @@ public class CodeForcesResponse<T> {
     public void setResult(T aResult) {
         result = aResult;
     }
+
+    @Override
+    public String toString() {
+        return "CodeForcesResponse{" +
+                "status='" + status + '\'' +
+                ", comment='" + comment + '\'' +
+                ", result=" + result +
+                '}';
+    }
 }

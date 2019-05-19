@@ -21,11 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ContestFragment extends Fragment implements Injectable {
 
-    TextView mContestTextView;
-    Button mLoadContestsBtn;
+    RecyclerView mContestRecycleView;
 
     @Inject
     ViewModelProvider.Factory mFactory;
@@ -44,13 +44,6 @@ public class ContestFragment extends Fragment implements Injectable {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mContestTextView = getView().findViewById(R.id.fragment_contest_tv_contests);
-        mLoadContestsBtn = getView().findViewById(R.id.fragment_contest_btn_call);
-
-        mLoadContestsBtn.setOnClickListener(v -> {
-
-        });
     }
 
     @Override
@@ -62,9 +55,6 @@ public class ContestFragment extends Fragment implements Injectable {
     }
 
     private void updateContests(@NonNull List<Contest> aContests) {
-        mContestTextView.setText("");
-        for (Contest contest : aContests) {
-            mContestTextView.append(contest.toString());
-        }
+
     }
 }
