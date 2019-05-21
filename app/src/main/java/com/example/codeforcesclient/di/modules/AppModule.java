@@ -1,6 +1,13 @@
 package com.example.codeforcesclient.di.modules;
 
-import com.example.codeforcesclient.data.remote.ContestService;
+import android.app.Application;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
+
+import com.example.codeforcesclient.data.local.CodeForcesDatabase;
+import com.example.codeforcesclient.data.local.dao.ContestDao;
+import com.example.codeforcesclient.data.remote.service.ContestService;
 import com.example.codeforcesclient.di.components.ViewModelSubComponent;
 import com.example.codeforcesclient.viewmodel.ViewModelFactory;
 import com.google.gson.FieldNamingPolicy;
@@ -9,16 +16,14 @@ import com.google.gson.GsonBuilder;
 
 import javax.inject.Singleton;
 
-import androidx.lifecycle.ViewModelProvider;
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module(subcomponents = ViewModelSubComponent.class)
 public class AppModule {
-    private final String mBaseUrl = "http://codeforces.com/api/";
+    private static final String sBaseUrl = "http://codeforces.com/api/";
 
     @Provides
     @Singleton
@@ -32,7 +37,7 @@ public class AppModule {
     @Singleton
     Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
+                .baseUrl(sBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -41,16 +46,27 @@ public class AppModule {
     @Singleton
     ContestService provideContestService() {
         return new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
+                .baseUrl(sBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ContestService.class);
+    }
+
+    @Singleton
+    @Provides
+    CodeForcesDatabase providesCodeForcesDatabase(Application aApplication) {
+        return Room.databaseBuilder(aApplication, CodeForcesDatabase.class, "CodeForces").build();
+    }
+
+    @Singleton
+    @Provides
+    ContestDao provideContestDao(CodeForcesDatabase aCodeForcesDatabase) {
+        return aCodeForcesDatabase.contestDao();
     }
 
     @Provides
     @Singleton
     ViewModelProvider.Factory provideViewModelFactory(ViewModelSubComponent.Builder viewModelSubComponent) {
         return new ViewModelFactory(viewModelSubComponent.build());
-
     }
 }

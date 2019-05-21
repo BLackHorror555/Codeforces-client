@@ -91,5 +91,92 @@ public final class User {
     @ColumnInfo(name = "title_photo")
     private URL titlePhoto;
 
+    @NonNull
+    public String getUserHandle() {
+        return mUserHandle;
+    }
 
+    @Nullable
+    public String getEmail() {
+        return mEmail;
+    }
+
+    @Nullable
+    public String getVkId() {
+        return mVkId;
+    }
+
+    @Nullable
+    public String getOpenId() {
+        return openId;
+    }
+
+    @Nullable
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Nullable
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Nullable
+    public String getCountry() {
+        return country;
+    }
+
+    @Nullable
+    public String getCity() {
+        return city;
+    }
+
+    @Nullable
+    public String getOrganization() {
+        return organization;
+    }
+
+    @Nullable
+    public String getRank() {
+        return rank;
+    }
+
+    @Nullable
+    public String getMaxRank() {
+        return maxRank;
+    }
+
+    public int getContribution() {
+        return contribution;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public int getMaxRating() {
+        return maxRating;
+    }
+
+    public long getLastOnlineTimeSeconds() {
+        return lastOnlineTimeSeconds;
+    }
+
+    public long getLastRegistrationTimeSeconds() {
+        return lastRegistrationTimeSeconds;
+    }
+
+    public int getFriendCount() {
+        return friendCount;
+    }
+
+    @NonNull
+    public URL getAvatar() {
+        return avatar;
+    }
+
+    @NonNull
+    public URL getTitlePhoto() {
+        return titlePhoto;
+    }
 }

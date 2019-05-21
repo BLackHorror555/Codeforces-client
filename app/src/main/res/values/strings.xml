@@ -5,4 +5,7 @@
     <string name="nav_menu_rating">Rating</string>
     <string name="nav_menu_gym">Gym</string>
     <string name="nav_menu_menu">Menu</string>
+    <string name="detail_info">detail info</string>
+    <string name="contest_item_starting_at">Starting at:</string>
+    <string name="contest_item_duration">Duration:</string>
 </resources>

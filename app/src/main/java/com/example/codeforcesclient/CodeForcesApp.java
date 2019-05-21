@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.example.codeforcesclient.di.AppInjector;
-import com.example.codeforcesclient.di.components.DaggerAppComponent;
 
 import javax.inject.Inject;
 
@@ -19,7 +18,6 @@ public class CodeForcesApp extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-
         AppInjector.init(this);
     }
 

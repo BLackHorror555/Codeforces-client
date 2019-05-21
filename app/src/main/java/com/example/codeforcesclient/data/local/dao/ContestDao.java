@@ -1,5 +1,7 @@
 package com.example.codeforcesclient.data.local.dao;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -29,7 +31,7 @@ public interface ContestDao {
     void deleteById(int id);
 
     @Query("SELECT * FROM contest")
-    List<Contest> loadAll();
+    LiveData<List<Contest>> loadAll();
 
     @Query("SELECT * FROM contest WHERE name LIKE :contestName LIMIT 1")
     Contest findByName(String contestName);

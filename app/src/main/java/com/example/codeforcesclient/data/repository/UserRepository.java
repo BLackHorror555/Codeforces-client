@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.codeforcesclient.data.local.dao.UserDao;
 import com.example.codeforcesclient.data.local.model.User;
-import com.example.codeforcesclient.data.remote.UserService;
+import com.example.codeforcesclient.data.remote.service.UserService;
 
 import javax.inject.Inject;
 
