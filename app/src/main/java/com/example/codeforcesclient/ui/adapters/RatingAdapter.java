@@ -1,5 +1,6 @@
 package com.example.codeforcesclient.ui.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +17,29 @@ import java.util.List;
 public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.UserViewHolder> {
 
     private List<User> mUsers;
+    private UserClickListener mUserClickListener;
 
-    public RatingAdapter(List<User> aUsers) {
+    public RatingAdapter(List<User> aUsers, UserClickListener aListener) {
+        mUserClickListener = aListener;
         mUsers = aUsers;
     }
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         TextView value;
-        TextView contribution;
+        private UserClickListener mUserClickListener;
 
-        UserViewHolder(@NonNull View itemView) {
+        UserViewHolder(@NonNull View itemView, UserClickListener aUserClickListener) {
             super(itemView);
             name = itemView.findViewById(R.id.user_name_rated_list_tv);
             value = itemView.findViewById(R.id.rating_user_value_tv);
-            contribution = itemView.findViewById(R.id.contribution_value_tv);
+            mUserClickListener = aUserClickListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mUserClickListener.onUserSelected(mUsers.get(getAdapterPosition()));
         }
     }
 
@@ -39,18 +48,23 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.UserViewHo
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View userView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.user_rated_view_holder, parent, false);
-        return new UserViewHolder(userView);
+        return new UserViewHolder(userView, mUserClickListener);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = mUsers.get(position);
-        holder.name.setText(user.getUserHandle());
-        holder.contribution.setText(user.getContribution());
+        holder.name.setText(user.getHandle());
+        holder.value.setText(Integer.toString(user.getRating()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mUsers.size();
+    }
+
+    public void setUsers(List<User> aUsers) {
+        mUsers = aUsers;
     }
 }

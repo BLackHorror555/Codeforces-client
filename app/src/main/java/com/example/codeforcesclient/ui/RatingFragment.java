@@ -7,23 +7,26 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeforcesclient.R;
 import com.example.codeforcesclient.data.local.model.User;
 import com.example.codeforcesclient.di.Injectable;
 import com.example.codeforcesclient.ui.adapters.RatingAdapter;
+import com.example.codeforcesclient.ui.adapters.UserClickListener;
+import com.example.codeforcesclient.viewmodel.UserListViewModel;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class RatingFragment extends Fragment implements Injectable {
-    private RecyclerView mRatingRecycleView;
-    private RatingAdapter mRatingAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
+public class RatingFragment extends BaseRecycleViewFragment<RatingAdapter> implements Injectable {
 
+    private final UserClickListener mUserClickListener = aUser -> {
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            ((MainActivity) getActivity()).showUserInfo(aUser.getHandle());
+        }
+    };
 
     @Nullable
     @Override
@@ -33,17 +36,28 @@ public class RatingFragment extends Fragment implements Injectable {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mRecyclerView = view.findViewById(R.id.recycle_view_rating);
         super.onViewCreated(view, savedInstanceState);
-        mRatingRecycleView = view.findViewById(R.id.recycle_view_rating);
-        setupRatingView();
     }
 
-    private void setupRatingView() {
-        mRatingAdapter = new RatingAdapter(new ArrayList<User>());
-        mRatingRecycleView.setAdapter(mRatingAdapter);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRatingRecycleView.setLayoutManager(mLayoutManager);
-        mRatingRecycleView.setHasFixedSize(true);
-        mRatingRecycleView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+    @Override
+    protected RatingAdapter createAdapter() {
+        return new RatingAdapter(Collections.emptyList(), mUserClickListener);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        observeViewModel();
+    }
+
+    private void observeViewModel() {
+        UserListViewModel userViewModel = ViewModelProviders.of(this, mFactory).get(UserListViewModel.class);
+        userViewModel.getRatedUsers().observe(this, this::updateRating);
+    }
+
+    private void updateRating(@NonNull List<User> aUsers) {
+        mAdapter.setUsers(aUsers);
+        mAdapter.notifyDataSetChanged();
     }
 }

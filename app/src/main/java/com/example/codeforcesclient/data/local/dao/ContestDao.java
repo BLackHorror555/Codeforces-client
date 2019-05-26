@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.codeforcesclient.data.local.model.Contest;
 
@@ -38,4 +39,10 @@ public interface ContestDao {
 
     @Query("SELECT * FROM contest WHERE id = :aId")
     Contest findById(int aId);
+
+    @Transaction
+    default void updateData(List<Contest> aContests) {
+        deleteAll();
+        insertAll(aContests);
+    }
 }

@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.net.URL;
-
 /**
  * Immutable model class for a User.
  */
@@ -17,15 +15,15 @@ public final class User {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "handle")
-    private String mUserHandle;
+    private String handle;
 
     @Nullable
     @ColumnInfo(name = "email")
-    private String mEmail;
+    private String email;
 
     @Nullable
     @ColumnInfo(name = "vk_id")
-    private String mVkId;
+    private String vkId;
 
     @Nullable
     @ColumnInfo(name = "open_id")
@@ -59,51 +57,44 @@ public final class User {
     @ColumnInfo(name = "max_rank")
     private String maxRank;
 
-    @NonNull
     @ColumnInfo(name = "contribution")
     private int contribution;
 
-    @NonNull
     @ColumnInfo(name = "rating")
     private int rating;
 
-    @NonNull
     @ColumnInfo(name = "max_rating")
     private int maxRating;
 
-    @NonNull
     @ColumnInfo(name = "last_online_time")
     private long lastOnlineTimeSeconds;
 
-    @NonNull
     @ColumnInfo(name = "last_registration_time")
     private long lastRegistrationTimeSeconds;
 
-    @NonNull
     @ColumnInfo(name = "friend_count")
-    private int friendCount;
+    private int friendOfCount;
 
     @NonNull
     @ColumnInfo(name = "avatar")
-    private URL avatar;
+    private String avatar;
 
     @NonNull
     @ColumnInfo(name = "title_photo")
-    private URL titlePhoto;
+    private String titlePhoto;
 
-    @NonNull
-    public String getUserHandle() {
-        return mUserHandle;
+    public String getHandle() {
+        return handle;
     }
 
     @Nullable
     public String getEmail() {
-        return mEmail;
+        return email;
     }
 
     @Nullable
     public String getVkId() {
-        return mVkId;
+        return vkId;
     }
 
     @Nullable
@@ -166,17 +157,93 @@ public final class User {
         return lastRegistrationTimeSeconds;
     }
 
-    public int getFriendCount() {
-        return friendCount;
+    public int getFriendOfCount() {
+        return friendOfCount;
     }
 
     @NonNull
-    public URL getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
     @NonNull
-    public URL getTitlePhoto() {
+    public String getTitlePhoto() {
         return titlePhoto;
+    }
+
+    public void setHandle(@NonNull String aHandle) {
+        handle = aHandle;
+    }
+
+    public void setEmail(@Nullable String aEmail) {
+        email = aEmail;
+    }
+
+    public void setVkId(@Nullable String aVkId) {
+        vkId = aVkId;
+    }
+
+    public void setOpenId(@Nullable String aOpenId) {
+        openId = aOpenId;
+    }
+
+    public void setFirstName(@Nullable String aFirstName) {
+        firstName = aFirstName;
+    }
+
+    public void setLastName(@Nullable String aLastName) {
+        lastName = aLastName;
+    }
+
+    public void setCountry(@Nullable String aCountry) {
+        country = aCountry;
+    }
+
+    public void setCity(@Nullable String aCity) {
+        city = aCity;
+    }
+
+    public void setOrganization(@Nullable String aOrganization) {
+        organization = aOrganization;
+    }
+
+    public void setRank(@Nullable String aRank) {
+        rank = aRank;
+    }
+
+    public void setMaxRank(@Nullable String aMaxRank) {
+        maxRank = aMaxRank;
+    }
+
+    public void setContribution(int aContribution) {
+        contribution = aContribution;
+    }
+
+    public void setRating(int aRating) {
+        rating = aRating;
+    }
+
+    public void setMaxRating(int aMaxRating) {
+        maxRating = aMaxRating;
+    }
+
+    public void setLastOnlineTimeSeconds(long aLastOnlineTimeSeconds) {
+        lastOnlineTimeSeconds = aLastOnlineTimeSeconds;
+    }
+
+    public void setLastRegistrationTimeSeconds(long aLastRegistrationTimeSeconds) {
+        lastRegistrationTimeSeconds = aLastRegistrationTimeSeconds;
+    }
+
+    public void setFriendOfCount(int aFriendOfCount) {
+        friendOfCount = aFriendOfCount;
+    }
+
+    public void setAvatar(@NonNull String aAvatar) {
+        avatar = aAvatar;
+    }
+
+    public void setTitlePhoto(@NonNull String aTitlePhoto) {
+        titlePhoto = aTitlePhoto;
     }
 }

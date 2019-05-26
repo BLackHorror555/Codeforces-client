@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.codeforcesclient.R;
 import com.example.codeforcesclient.data.local.model.Contest;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 

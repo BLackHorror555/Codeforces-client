@@ -4,17 +4,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.codeforcesclient.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import dagger.android.AndroidInjection;
+import com.example.codeforcesclient.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import javax.inject.Inject;
+
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Toast.makeText(MainActivity.this, "Problemsets", Toast.LENGTH_SHORT).show();
             break;
         case R.id.action_rating:
-            Toast.makeText(MainActivity.this, "Rating", Toast.LENGTH_SHORT).show();
+            showFragment(new RatingFragment());
             break;
         case R.id.action_gym:
             Toast.makeText(MainActivity.this, "Gym", Toast.LENGTH_SHORT).show();
@@ -61,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return true;
     }
 
+    public void showUserInfo(String aUserHandle) {
+        showFragment(UserInfoFragment.newInstance(aUserHandle));
+    }
+
     @Override
     public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
@@ -69,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void showFragment(Fragment aFragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, aFragment, null).commit();
+                .replace(R.id.fragment_container, aFragment)
+                .commit();
     }
 
     private void setupBottomNavigation() {

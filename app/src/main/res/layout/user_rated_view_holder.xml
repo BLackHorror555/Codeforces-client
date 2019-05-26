@@ -5,38 +5,31 @@
     android:id="@+id/rated_uses_view_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp">
 
     <TextView
         android:id="@+id/user_name_rated_list_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="Dimona" />
-
-    <TextView
-        android:id="@+id/contribution_value_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toEndOf="@+id/user_name_rated_list_tv"
-        app:layout_constraintTop_toTopOf="@+id/user_name_rated_list_tv"
-        tools:text="100" />
 
     <TextView
         android:id="@+id/rating_user_value_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toEndOf="@+id/contribution_value_tv"
-        app:layout_constraintTop_toTopOf="@+id/contribution_value_tv"
+        app:layout_constraintTop_toTopOf="@+id/user_name_rated_list_tv"
         tools:text="1999" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,4 +8,7 @@
     <string name="detail_info">detail info</string>
     <string name="contest_item_starting_at">Starting at:</string>
     <string name="contest_item_duration">Duration:</string>
+    <string name="contest_rating_label">Contest rating:</string>
+    <string name="contribution_label">Contribution:</string>
+    <string name="friends_label">Friends:</string>
 </resources>

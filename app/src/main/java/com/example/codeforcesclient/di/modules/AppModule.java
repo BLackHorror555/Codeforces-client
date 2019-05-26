@@ -7,8 +7,11 @@ import androidx.room.Room;
 
 import com.example.codeforcesclient.data.local.CodeForcesDatabase;
 import com.example.codeforcesclient.data.local.dao.ContestDao;
+import com.example.codeforcesclient.data.local.dao.UserDao;
 import com.example.codeforcesclient.data.remote.service.ContestService;
+import com.example.codeforcesclient.data.remote.service.UserService;
 import com.example.codeforcesclient.di.components.ViewModelSubComponent;
+import com.example.codeforcesclient.utils.LoadExecutors;
 import com.example.codeforcesclient.viewmodel.ViewModelFactory;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -24,6 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(subcomponents = ViewModelSubComponent.class)
 public class AppModule {
     private static final String sBaseUrl = "http://codeforces.com/api/";
+    private static final Retrofit sRetrofit = new Retrofit.Builder()
+            .baseUrl(sBaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     @Provides
     @Singleton
@@ -35,22 +42,22 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit() {
-        return new Retrofit.Builder()
-                .baseUrl(sBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    LoadExecutors provideLoadExecutors() {
+        return LoadExecutors.createDefaultLoadExecutors();
     }
 
     @Provides
     @Singleton
     ContestService provideContestService() {
-        return new Retrofit.Builder()
-                .baseUrl(sBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ContestService.class);
+        return sRetrofit.create(ContestService.class);
     }
+
+    @Provides
+    @Singleton
+    UserService provideUserService() {
+        return sRetrofit.create(UserService.class);
+    }
+
 
     @Singleton
     @Provides
@@ -62,6 +69,12 @@ public class AppModule {
     @Provides
     ContestDao provideContestDao(CodeForcesDatabase aCodeForcesDatabase) {
         return aCodeForcesDatabase.contestDao();
+    }
+
+    @Singleton
+    @Provides
+    UserDao provideUserDao(CodeForcesDatabase aCodeForcesDatabase) {
+        return aCodeForcesDatabase.userDao();
     }
 
     @Provides

@@ -7,12 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeforcesclient.R;
 import com.example.codeforcesclient.data.local.model.Contest;
@@ -20,19 +15,10 @@ import com.example.codeforcesclient.di.Injectable;
 import com.example.codeforcesclient.ui.adapters.ContestsAdapter;
 import com.example.codeforcesclient.viewmodel.ContestViewModel;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
-
-public class ContestFragment extends Fragment implements Injectable {
-
-    private RecyclerView mContestRecycleView;
-    private ContestsAdapter mContestsAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
-
-    @Inject
-    ViewModelProvider.Factory mFactory;
+public class ContestFragment extends BaseRecycleViewFragment<ContestsAdapter> implements Injectable {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,18 +33,13 @@ public class ContestFragment extends Fragment implements Injectable {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mRecyclerView = view.findViewById(R.id.recycle_view_contests);
         super.onViewCreated(view, savedInstanceState);
-        mContestRecycleView = view.findViewById(R.id.recycle_view_contests);
-        setupContestRecycleView();
     }
 
-    private void setupContestRecycleView() {
-        mContestsAdapter = new ContestsAdapter(new ArrayList<Contest>());
-        mContestRecycleView.setAdapter(mContestsAdapter);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mContestRecycleView.setLayoutManager(mLayoutManager);
-        mContestRecycleView.setHasFixedSize(true);
-        mContestRecycleView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+    @Override
+    protected ContestsAdapter createAdapter() {
+        return new ContestsAdapter(Collections.emptyList());
     }
 
     @Override
@@ -70,7 +51,7 @@ public class ContestFragment extends Fragment implements Injectable {
     }
 
     private void updateContests(@NonNull List<Contest> aContests) {
-        mContestsAdapter.setContests(aContests);
-        mContestsAdapter.notifyDataSetChanged();
+        mAdapter.setContests(aContests);
+        mAdapter.notifyDataSetChanged();
     }
 }

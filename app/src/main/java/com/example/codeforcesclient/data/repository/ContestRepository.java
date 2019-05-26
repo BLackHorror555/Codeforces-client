@@ -9,6 +9,7 @@ import com.example.codeforcesclient.data.local.dao.ContestDao;
 import com.example.codeforcesclient.data.local.model.Contest;
 import com.example.codeforcesclient.data.remote.CodeForcesResponse;
 import com.example.codeforcesclient.data.remote.service.ContestService;
+import com.example.codeforcesclient.utils.LoadExecutors;
 
 import java.util.List;
 
@@ -20,21 +21,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 @Singleton
-public class ContestRepository {
+public class ContestRepository extends BaseRepository{
 
     private static final String TAG = "ContestRepository";
     private ContestService mContestService;
-    private static final int FRESH_TIMOUT_IN_S = 2 * 60;
     private ContestDao mContestDao;
 
     @Inject
-    public ContestRepository(ContestDao aContestDao, ContestService aContestService) {
+    ContestRepository(ContestDao aContestDao, ContestService aContestService, LoadExecutors aLoadExecutors) {
+        super(aLoadExecutors);
         mContestDao = aContestDao;
         mContestService = aContestService;
     }
 
     public LiveData<List<Contest>> getContests() {
-        fetchContests();
+        if (!isCashed()) {
+            fetchContests();
+            setCashed(true);
+        }
 
         return mContestDao.loadAll();
     }
@@ -46,10 +50,7 @@ public class ContestRepository {
             public void onResponse(@NonNull Call<CodeForcesResponse<List<Contest>>> call,
                                    @NonNull Response<CodeForcesResponse<List<Contest>>> response) {
                 if (response.body() != null) {
-                    new Thread(() -> {
-                        mContestDao.deleteAll();
-                        mContestDao.insertAll(response.body().getResult());
-                    }).start();
+                    executeLocal(() -> mContestDao.updateData(response.body().getResult()));
                 }
             }
 
