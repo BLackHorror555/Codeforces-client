@@ -24,7 +24,7 @@ public class RatingFragment extends BaseRecycleViewFragment<RatingAdapter> imple
 
     private final UserClickListener mUserClickListener = aUser -> {
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            ((MainActivity) getActivity()).showUserInfo(aUser.getHandle());
+            ((MainActivity) getActivity()).showFragmentWithBackStack(UserInfoFragment.newInstance(aUser.getHandle()));
         }
     };
 
@@ -46,12 +46,7 @@ public class RatingFragment extends BaseRecycleViewFragment<RatingAdapter> imple
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        observeViewModel();
-    }
-
-    private void observeViewModel() {
+    void observeViewModel() {
         UserListViewModel userViewModel = ViewModelProviders.of(this, mFactory).get(UserListViewModel.class);
         userViewModel.getRatedUsers().observe(this, this::updateRating);
     }

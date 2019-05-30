@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.codeforcesclient.data.local.dao.ContestDao;
 import com.example.codeforcesclient.data.local.model.Contest;
@@ -41,6 +42,33 @@ public class ContestRepository extends BaseRepository{
         }
 
         return mContestDao.loadAll();
+    }
+
+    public LiveData<List<Contest>> getGymContests() {
+        MutableLiveData<List<Contest>> gymContests = new MutableLiveData<>();
+        fetchGymContests(gymContests::setValue);
+
+        return gymContests;
+    }
+
+    interface ContestLoadCallback {
+        void load(List<Contest> aContests);
+    }
+
+    private void fetchGymContests(ContestLoadCallback aContestLoadCallback) {
+        Call<CodeForcesResponse<List<Contest>>> contestsCall = mContestService.getContests(true);
+        contestsCall.enqueue(new Callback<CodeForcesResponse<List<Contest>>>() {
+            @Override
+            public void onResponse(@NonNull Call<CodeForcesResponse<List<Contest>>> call,
+                                   @NonNull Response<CodeForcesResponse<List<Contest>>> response) {
+                aContestLoadCallback.load(response.body().getResult());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CodeForcesResponse<List<Contest>>> call, @NonNull Throwable t) {
+                Log.w(TAG, "Failed to load contests from server. " + t);
+            }
+        });
     }
 
     private void fetchContests() {

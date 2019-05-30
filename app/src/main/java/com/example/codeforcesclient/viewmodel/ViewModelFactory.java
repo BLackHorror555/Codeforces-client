@@ -23,7 +23,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         mCreators.put(ContestViewModel.class, aViewModelSubComponent::contestViewModel);
         mCreators.put(UserListViewModel.class, aViewModelSubComponent::userListViewModel);
         mCreators.put(UserViewModel.class, aViewModelSubComponent::userViewModel);
-//        mCreators.put(ProblemViewModel.class, aViewModelSubComponent::problemViewModel);
+        mCreators.put(ProblemListViewModel.class, aViewModelSubComponent::problemListViewModel);
     }
 
     @NonNull

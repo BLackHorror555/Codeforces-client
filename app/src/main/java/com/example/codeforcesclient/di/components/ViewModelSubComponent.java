@@ -2,6 +2,7 @@ package com.example.codeforcesclient.di.components;
 
 import com.example.codeforcesclient.ui.BaseRecycleViewFragment;
 import com.example.codeforcesclient.viewmodel.ContestViewModel;
+import com.example.codeforcesclient.viewmodel.ProblemListViewModel;
 import com.example.codeforcesclient.viewmodel.UserListViewModel;
 import com.example.codeforcesclient.viewmodel.UserViewModel;
 import com.example.codeforcesclient.viewmodel.ViewModelFactory;
@@ -25,5 +26,5 @@ public interface ViewModelSubComponent {
     ContestViewModel contestViewModel();
     UserListViewModel userListViewModel();
     UserViewModel userViewModel();
-//    ProblemViewModel problemViewModel();
+    ProblemListViewModel problemListViewModel();
 }

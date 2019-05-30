@@ -7,8 +7,10 @@ import androidx.room.Room;
 
 import com.example.codeforcesclient.data.local.CodeForcesDatabase;
 import com.example.codeforcesclient.data.local.dao.ContestDao;
+import com.example.codeforcesclient.data.local.dao.ProblemDao;
 import com.example.codeforcesclient.data.local.dao.UserDao;
 import com.example.codeforcesclient.data.remote.service.ContestService;
+import com.example.codeforcesclient.data.remote.service.ProblemService;
 import com.example.codeforcesclient.data.remote.service.UserService;
 import com.example.codeforcesclient.di.components.ViewModelSubComponent;
 import com.example.codeforcesclient.utils.LoadExecutors;
@@ -58,6 +60,11 @@ public class AppModule {
         return sRetrofit.create(UserService.class);
     }
 
+    @Provides
+    @Singleton
+    ProblemService provideProblemService() {
+        return sRetrofit.create(ProblemService.class);
+    }
 
     @Singleton
     @Provides
@@ -76,6 +83,12 @@ public class AppModule {
     UserDao provideUserDao(CodeForcesDatabase aCodeForcesDatabase) {
         return aCodeForcesDatabase.userDao();
     }
+    @Singleton
+    @Provides
+    ProblemDao provideProblemDao(CodeForcesDatabase aCodeForcesDatabase) {
+        return aCodeForcesDatabase.problemDao();
+    }
+
 
     @Provides
     @Singleton

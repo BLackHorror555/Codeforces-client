@@ -78,7 +78,7 @@ public class UserInfoFragment extends Fragment implements Injectable {
                 .into(mUserImageView);
     }
 
-    public static UserInfoFragment newInstance(String aUserHandle) {
+    static UserInfoFragment newInstance(String aUserHandle) {
         UserInfoFragment userInfoFragment = new UserInfoFragment();
         Bundle bundle = new Bundle();
         bundle.putString(KEY_USER_HANDLE, aUserHandle);

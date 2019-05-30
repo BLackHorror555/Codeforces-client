@@ -19,9 +19,11 @@ import java.util.List;
 public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.ContestViewHolder> {
 
     private List<Contest> mContests;
+    private ContestClickListener mContestClickListener;
 
-    public ContestsAdapter(List<Contest> aContests) {
+    public ContestsAdapter(List<Contest> aContests, ContestClickListener aContestClickListener) {
         mContests = aContests;
+        mContestClickListener = aContestClickListener;
     }
 
     @NonNull
@@ -39,10 +41,14 @@ public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.Contes
         holder.mPhase.setText(contest.getPhase());
         holder.mDuration.setText(DateUtils.formatElapsedTime(contest.getDurationSeconds()));
         holder.mStartTime.setText(new Date((long)contest.getStartTimeSeconds() * 1000).toString());
-        holder.mArrow.setOnClickListener(v -> {
-        });
-    }
 
+        if (!contest.getPhase().equals(Contest.ContestPhase.FINISHED)) {
+            holder.mArrow.setVisibility(View.INVISIBLE);
+        } else {
+            holder.mArrow.setVisibility(View.VISIBLE);
+        }
+        holder.bind(mContests.get(position), mContestClickListener);
+    }
 
 
     @Override
@@ -50,15 +56,15 @@ public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.Contes
         return mContests.size();
     }
 
-    static class ContestViewHolder extends RecyclerView.ViewHolder {
+    class ContestViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mContestName;
-        public TextView mDuration;
-        public TextView mPhase;
-        public TextView mStartTime;
-        public ImageButton mArrow;
+        TextView mContestName;
+        TextView mDuration;
+        TextView mPhase;
+        TextView mStartTime;
+        ImageButton mArrow;
 
-        public ContestViewHolder(@NonNull View itemView) {
+        ContestViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mContestName = itemView.findViewById(R.id.contest_name_tv);
@@ -66,6 +72,10 @@ public class ContestsAdapter extends RecyclerView.Adapter<ContestsAdapter.Contes
             mDuration = itemView.findViewById(R.id.contest_duration_tv);
             mStartTime = itemView.findViewById(R.id.starting_time_tv);
             mArrow = itemView.findViewById(R.id.arrow_image_btn);
+        }
+
+        void bind(Contest aContest, ContestClickListener aContestClickListener) {
+            itemView.setOnClickListener(v -> aContestClickListener.onClick(aContest));
         }
     }
 

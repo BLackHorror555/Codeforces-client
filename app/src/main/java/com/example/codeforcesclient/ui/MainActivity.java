@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     private BottomNavigationView mBottomNavigationView;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,22 +37,35 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, fragment);
         }
+        showFragment(new ProblemFragment());
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem aMenuItem) {
         switch (aMenuItem.getItemId()) {
         case R.id.action_contest:
+
             showFragment(new ContestFragment());
             break;
         case R.id.action_problemset:
-            Toast.makeText(MainActivity.this, "Problemsets", Toast.LENGTH_SHORT).show();
+            showFragment(new ProblemFragment());
             break;
         case R.id.action_rating:
             showFragment(new RatingFragment());
             break;
         case R.id.action_gym:
-            Toast.makeText(MainActivity.this, "Gym", Toast.LENGTH_SHORT).show();
+            showFragment(new GymContestsFragment());
             break;
         case R.id.action_menu:
             Toast.makeText(MainActivity.this, "Menu", Toast.LENGTH_SHORT).show();
@@ -60,8 +74,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return true;
     }
 
-    public void showUserInfo(String aUserHandle) {
-        showFragment(UserInfoFragment.newInstance(aUserHandle));
+    public void showFragmentWithBackStack(Fragment aFragment) {
+        mCurrentFragment = aFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, mCurrentFragment)
+                .addToBackStack(null)
+                .commit();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -69,11 +89,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return dispatchingAndroidInjector;
     }
 
-    private void showFragment(Fragment aFragment) {
+    void showFragment(Fragment aFragment) {
+
+        if (mCurrentFragment != null && mCurrentFragment.getClass() == aFragment.getClass()) {
+            return;
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, aFragment)
                 .commit();
+        mCurrentFragment = aFragment;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     private void setupBottomNavigation() {

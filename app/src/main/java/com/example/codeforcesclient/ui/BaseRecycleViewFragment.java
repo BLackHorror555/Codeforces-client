@@ -29,12 +29,18 @@ public abstract class BaseRecycleViewFragment<A extends RecyclerView.Adapter> ex
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupContestRecycleView();
+        setupRecycleView();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        observeViewModel();
     }
 
     protected abstract A createAdapter();
 
-    protected void setupContestRecycleView() {
+    protected void setupRecycleView() {
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -42,4 +48,6 @@ public abstract class BaseRecycleViewFragment<A extends RecyclerView.Adapter> ex
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
     }
+
+    abstract void observeViewModel();
 }
