@@ -1,5 +1,5 @@
 # Codeforces-client
-Android client for Codeforces platform, used MVVM architecture pattern.
+Android client for Codeforces platform.
 App architecture follows MVVM pattern.
 
 ## Used frameworks:
